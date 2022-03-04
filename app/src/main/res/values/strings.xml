@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Domluv se!</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Domluv se!</string>
+    <string name="nav_header_subtitle">S námi to bude hračka</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Nastavení</string>
+
+    <string name="menu_home">Začni</string>
+    <string name="menu_gallery">Spravuj slovíčka</string>
+    <string name="menu_slideshow">Přidej slovíčko</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

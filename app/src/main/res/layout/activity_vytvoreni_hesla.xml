@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.gallery.VytvoreniHesla">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Domluv se!"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="50dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="30dp"
+                android:text="S námi to bude hračka, nevěříte?"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="30dp"
+                android:text="1) Vložíte obrázek"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="30dp"
+                android:text="2) Pojmenujete ho"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="30dp"
+                android:text="3) Uložíte"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="30dp"
+                android:text="4) A máte obrázkovou kartičku"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="30dp"
+                android:text="5) Dítě z kartiček jednoduše poskládá větu"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:paddingLeft="30dp"
+                android:text="Jednoduché, že?"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="30dp"
+                    android:text="Zadejte heslo:"
+                    android:textColor="@color/black"
+                    android:textSize="30dp" />
+
+                <EditText
+                    android:id="@+id/Heslo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Heslo"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:paddingLeft="30dp"
+                android:text="Nejdříve si prosím nastavte heslo, slouží pouze k tomu, aby dítě nemohlo v nestřežený okamžik smazat slovíčka, nebo udělat nějakou jinou neplechu."
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="UlozHeslo"
+                android:paddingLeft="30dp"
+                android:text="Hotovo"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
