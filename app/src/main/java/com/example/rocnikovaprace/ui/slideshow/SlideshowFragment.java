@@ -1,51 +1,35 @@
 package com.example.rocnikovaprace.ui.slideshow;
 
-import static android.app.Activity.RESULT_OK;
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.rocnikovaprace.MainActivity;
 import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.databinding.FragmentSlideshowBinding;
-import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
 public class SlideshowFragment extends Fragment {
 
-    private static final int GalleryPick = 1;
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
-    private static final int IMAGEPICK_GALLERY_REQUEST = 300;
-    private static final int IMAGE_PICKCAMERA_REQUEST = 400;
     String cameraPermission[];
     String storagePermission[];
-    Uri imageuri;
     ImageButton imageButton;
 
     private SlideshowViewModel slideshowViewModel;
@@ -60,12 +44,12 @@ public class SlideshowFragment extends Fragment {
         View root = binding.getRoot();
 
 
-        // dialog
+        // Vytvoří dialog pro zadání hesla
         AlertDialog.Builder builder
                 = new AlertDialog.Builder(getContext());
         builder.setTitle("Zadejte heslo");
 
-        // set the custom layout
+        // Nastaví vzhled dialogu
         final View customLayout
                 = getLayoutInflater()
                 .inflate(
@@ -77,6 +61,7 @@ public class SlideshowFragment extends Fragment {
                 "OK",
                 new DialogInterface.OnClickListener() {
 
+                    //Ověří správnost zadaného hesla, pokud je špatné vrátí uživatele na domovskou obrazovku
                     @Override
                     public void onClick(
                             DialogInterface dialog,
@@ -134,7 +119,7 @@ public class SlideshowFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
+// Vytvoří dialog na výběr obrázku, má dvě možnosti, buď z galerie nebo z fotoaparátu. Poté dialog zobrazí.
     private void showImagePicDialog() {
         String options[] = {"Fotoaparátu", "Galerie"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

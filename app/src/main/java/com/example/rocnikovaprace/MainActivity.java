@@ -1,26 +1,17 @@
 package com.example.rocnikovaprace;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileUtils;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Menu;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
 import com.example.rocnikovaprace.ui.gallery.VytvoreniHesla;
-import com.example.rocnikovaprace.ui.slideshow.SlideshowFragment;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
@@ -29,27 +20,21 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.rocnikovaprace.databinding.ActivityMainBinding;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     File file;
-    int vyska;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +44,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-
+//Zjistí, jestli je už vytvořené heslo, pokud ne, spustí novou aktivitu
         File heslosoubor = new File(getApplicationContext().getFilesDir(), "heslo.txt");
-String zeSouboru= "";
+        String zeSouboru = "";
         try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
             zeSouboru = br.readLine();
         } catch (Exception e) {
             System.out.println("Chyba při čtení ze souboru.");
         }
 
-        if(zeSouboru.equals("")){
+        if (zeSouboru.equals("")) {
             Intent i = new Intent(getApplicationContext(), VytvoreniHesla.class);
             startActivity(i);
 
         }
-
-
 
 
         DrawerLayout drawer = binding.drawerLayout;
@@ -119,83 +102,82 @@ String zeSouboru= "";
         }
     }
 
-
-    public void Ulozit(View view) {
+  // Tato metoda se spustí po kliknutí na tlačítko uložit
+    public void Ulozit(View view){
         ImageButton imageButton = findViewById(R.id.imageButton);
         EditText editText = findViewById(R.id.Slovo);
         CheckBox slovicko = findViewById(R.id.Slovicko);
         CheckBox aktivita = findViewById(R.id.Aktivita);
         String nazev = editText.getText().toString();
 
-
-
+// Natsaví soubor podle toho, jestli je to slovicko neebo aktivita
         if (slovicko.isChecked() == true && aktivita.isChecked() == false) {
             file = new File(getApplicationContext().getFilesDir(), "slovicka.txt");
         }
 
-        if (aktivita.isChecked() == true  && slovicko.isChecked() == false) {
+        if (aktivita.isChecked() == true && slovicko.isChecked() == false) {
             file = new File(getApplicationContext().getFilesDir(), "aktivity.txt");
         }
-
-        if (aktivita.isChecked() == true  && slovicko.isChecked() == true) {
+//Ošetřuje chybu, nejde vytvořit slovíčko i aktivitu zároveň
+        if (aktivita.isChecked() == true && slovicko.isChecked() == true) {
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setMessage("Vyberte buď slovíčko nebo aktivitu")
-                    .setPositiveButton("ok" , null )
+                    .setPositiveButton("ok", null)
                     .show();
             return;
         }
 
-
-        if (aktivita.isChecked() == false  && slovicko.isChecked() == false) {
+// Ošetřuje chybu. Uživatel musí zadat, jestli je to slovíčko, nebo aktivita
+        if (aktivita.isChecked() == false && slovicko.isChecked() == false) {
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setMessage("Vyberte buď slovíčko nebo aktivitu")
-                    .setPositiveButton("ok" , null )
+                    .setPositiveButton("ok", null)
                     .show();
             return;
         }
-
+//Prohlídne všechna slovíčka a pokud, už takové slovíčko existuje, upozorní na to uživatele
         File oba = new File(getApplicationContext().getFilesDir(), "slovicka.txt");
-        String zeSouboru = "";
+        String zeSouboru;
         try (BufferedReader br = new BufferedReader(new FileReader(oba))) {
             while ((zeSouboru = br.readLine()) != null) {
-                if (nazev.equals(zeSouboru)){
+                if (nazev.equals(zeSouboru)) {
                     AlertDialog dialog = new AlertDialog.Builder(this)
                             .setMessage("Toto slovíčko již existuje. Změnte název.")
-                            .setPositiveButton("ok" , null )
+                            .setPositiveButton("ok", null)
                             .show();
-                    return;}
+                    return;
+                }
 
             }
         } catch (Exception e) {
             editText.setText("Chyba při čtení ze souboru.");
         }
 
-
+//Prohlídne všechny aktivity a pokud, už taková aktivita existuje, upozorní na to uživatele
         oba = new File(getApplicationContext().getFilesDir(), "aktivity.txt");
-        zeSouboru = "";
         try (BufferedReader br = new BufferedReader(new FileReader(oba))) {
             while ((zeSouboru = br.readLine()) != null) {
-                if (nazev.equals(zeSouboru)){
+                if (nazev.equals(zeSouboru)) {
                     AlertDialog dialog = new AlertDialog.Builder(this)
                             .setMessage("Toto slovíčko již existuje. Změnte název.")
-                            .setPositiveButton("ok" , null )
+                            .setPositiveButton("ok", null)
                             .show();
-                    return;}
+                    return;
+                }
 
             }
         } catch (Exception e) {
             editText.setText("Chyba při čtení ze souboru.");
         }
 
-
-
+//Vezme obrázek z tlačítka a uložího ho
         BitmapDrawable drawable = (BitmapDrawable) imageButton.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         new ImageSaver(this).
                 setFileName(nazev + ".png").
                 setDirectoryName("images").
                 save(bitmap);
-
+//Uloží název slovíčka nabo aktivity
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
             bw.write(nazev);
             bw.newLine();

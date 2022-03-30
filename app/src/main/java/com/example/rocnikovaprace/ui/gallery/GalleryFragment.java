@@ -3,12 +3,13 @@ package com.example.rocnikovaprace.ui.gallery;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -16,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.rocnikovaprace.Adapter;
 import com.example.rocnikovaprace.ImageSaver;
 import com.example.rocnikovaprace.MainActivity;
@@ -24,12 +24,12 @@ import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.Slovicka;
 import com.example.rocnikovaprace.databinding.FragmentGalleryBinding;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,23 +40,12 @@ public class GalleryFragment extends Fragment {
     private FragmentGalleryBinding binding;
     String nazevslova = "";
 
-    // Recycler View object
+
     RecyclerView recyclerView;
-
-    // Array list for recycler view data source
     ArrayList<Slovicka> source;
-
-    // Layout Manager
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
-
-    // adapter class object
     Adapter adapter;
-
-    // Linear Layout Manager
     LinearLayoutManager HorizontalLayout;
-
-    View ChildView;
-    int RecyclerViewItemPosition;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,12 +55,12 @@ public class GalleryFragment extends Fragment {
         View root = binding.getRoot();
 
 
-        // dialog
+        // Vytvoří dialog pro zadání hesla, bez kterého se nedá vstoupit do tohoto fragmentu
         AlertDialog.Builder builder
                 = new AlertDialog.Builder(getContext());
         builder.setTitle("Zadejte heslo");
 
-        // set the custom layout
+        // Nastaví vzhled dialogu
         final View customLayout
                 = getLayoutInflater()
                 .inflate(
@@ -80,91 +69,88 @@ public class GalleryFragment extends Fragment {
         builder.setView(customLayout);
         builder.setCancelable(false);
         builder.setPositiveButton(
-                        "OK",
-                        new DialogInterface.OnClickListener() {
+                "OK",
+                new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(
-                                    DialogInterface dialog,
-                                    int which) {
-                                EditText editText
-                                        = customLayout
-                                        .findViewById(
-                                                R.id.dialogoveheslo);
-                                String zeSouboru = "";
-                                File heslosoubor = new File(getContext().getFilesDir(), "heslo.txt");
-                                try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
-                                    zeSouboru = br.readLine();
-                                } catch (Exception e) {
-                                    System.out.println("Chyba při čtení ze souboru.");
-                                }
+                    //Ověří správnost hesla
+                    @Override
+                    public void onClick(
+                            DialogInterface dialog,
+                            int which) {
+                        EditText editText
+                                = customLayout
+                                .findViewById(
+                                        R.id.dialogoveheslo);
+                        String zeSouboru = "";
+                        File heslosoubor = new File(getContext().getFilesDir(), "heslo.txt");
+                        try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
+                            zeSouboru = br.readLine();
+                        } catch (Exception e) {
+                            System.out.println("Chyba při čtení ze souboru.");
+                        }
+//Pokud je heslo špatné vrátí uživatele na domovskou obrazovku
+                        if (zeSouboru.equals(editText.getText().toString())) {
+                        } else {
+                            Intent i = new Intent(getContext(), MainActivity.class);
+                            startActivity(i);
+                        }
 
-                                if (zeSouboru.equals(editText.getText().toString())){
-                                }
-                                else {
-                                Intent i = new Intent(getContext(), MainActivity.class);
-                                startActivity(i);}
 
+                    }
+                });
 
-                            }
-                        });
-
-        // create and show
-        // the alert dialog
+        // Zobrazí dialog
         AlertDialog dialog
                 = builder.create();
         dialog.show();
 
 
+        recyclerView
+                = (RecyclerView) root.findViewById(
+                R.id.recyclerview);
+        RecyclerViewLayoutManager
+                = new
 
-    // initialisation with id's
-    recyclerView
-                =(RecyclerView)root.findViewById(
-    R.id.recyclerview);
-    RecyclerViewLayoutManager
-                =new
+                LinearLayoutManager(
+                getContext());
 
-    LinearLayoutManager(
-            getContext());
-
-    // Set LayoutManager on Recycler View
+        // Přiřadí LayoutManager k Recycler View
         recyclerView.setLayoutManager(
-    RecyclerViewLayoutManager);
+                RecyclerViewLayoutManager);
 
-    // Adding items to RecyclerView.
-    AddItemsToRecyclerViewArrayList();
+        // Přidá položky do seznamu
+        AddItemsToRecyclerViewArrayList();
 
-    // calling constructor of adapter
-    // with source list as a parameter
-    adapter =new
+        // Zavolá konstruktor
+        adapter = new
 
-    Adapter(source);
+                Adapter(source);
 
-    // Set Horizontal Layout Manager
-    // for Recycler view
-    HorizontalLayout
-                =new
+        // Nastaví Horizontal Layout Manager pro Recycler view
+        HorizontalLayout
+                = new
 
-    LinearLayoutManager(
-            getActivity().
+                LinearLayoutManager(
+                getActivity().
 
-    getApplicationContext(),
+                        getApplicationContext(),
 
-    LinearLayoutManager.HORIZONTAL,
-            false);
+                LinearLayoutManager.HORIZONTAL,
+                false);
         recyclerView.setLayoutManager(HorizontalLayout);
 
-    // Set adapter on recycler view
+        // Nastaví adapter pro recycler view
         recyclerView.setAdapter(adapter);
 
 
-    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
 
         return root;
-}
+    }
 
+    // Uloží změněná data
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -202,17 +188,18 @@ public class GalleryFragment extends Fragment {
         binding = null;
     }
 
+    //Přidá položky do seznamu
     public void AddItemsToRecyclerViewArrayList() {
-        // Adding items to ArrayList
         source = new ArrayList<>();
-        int p;
         File file = new File(getContext().getFilesDir(), "slovicka.txt");
+        //Nejdřív je načte ze souboru
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String s;
-            p = 0;
+            int p = 0;
             while ((s = br.readLine()) != null) {
                 Bitmap bitmap = new ImageSaver(getContext()).setFileName(s + ".png").setDirectoryName("images").load();
                 Slovicka slovo = new Slovicka(s, bitmap);
+                //Potom je přidá do ArrayListu
                 source.add(slovo);
                 p++;
             }
@@ -224,6 +211,7 @@ public class GalleryFragment extends Fragment {
     }
 
 
+    //Umožňuje přesouvat položky v RecycleView
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, ItemTouchHelper.UP | ItemTouchHelper.DOWN) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -236,6 +224,7 @@ public class GalleryFragment extends Fragment {
             return false;
         }
 
+        //Po přetáhnutí nahoru, nebo dolu smaže položku ze seznamu
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
@@ -243,6 +232,7 @@ public class GalleryFragment extends Fragment {
             nazevslova = source.get(position).toString();
             source.remove(position);
             recyclerView.getAdapter().notifyItemRemoved(position);
+            //Vytvoří SnacBar s tlačítkem zpět, které umožňuje vrátit smazanou položku zpět
             Snackbar.make(recyclerView, nazevslova, Snackbar.LENGTH_LONG)
                     .setAction("Zpět", new View.OnClickListener() {
                         @Override

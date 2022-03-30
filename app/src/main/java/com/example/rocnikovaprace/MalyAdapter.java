@@ -6,33 +6,29 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
-    // The adapter class which
-// extends RecyclerView Adapter
 
-
-    // List with String type
     private List<Slovicka> list;
 
-    //declare interface
+    public interface onNoteListener {
+    }
 
-    // View Holder class which
-    // extends RecyclerView.ViewHolder
+
     public class MyView
             extends RecyclerView.ViewHolder {
 
-        // Text View
+
         TextView textView;
         ImageButton obrazek;
         CardView cardView;
 
-        // parameterised constructor for View Holder class
-        // which takes the view as a parameter
+        // Konstruktor s parametrem View
         public MyView(View view)
         {
             super(view);
@@ -53,52 +49,41 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
         }
     }
 
-    // Constructor for adapter class
-    // which takes a list of String type
+    // Další konstruktor
     public MalyAdapter(List<Slovicka> horizontalList)
     {
         this.list = horizontalList;
     }
 
-    // Override onCreateViewHolder which deals
-    // with the inflation of the card layout
-    // as an item for the RecyclerView.
+
     @Override
     public Adapter.MyView onCreateViewHolder(ViewGroup parent,
                                              int viewType)
     {
 
-        // Inflate item.xml using LayoutInflator
+        // Přiřazení rozložení a vzhledu položky v recyclerView
         View itemView
                 = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.malyitem,
                         parent,
                         false);
-
-        // return itemView
         return new Adapter.MyView(itemView);
     }
 
-    // Override onBindViewHolder which deals
-    // with the setting of different data
-    // and methods related to clicks on
-    // particular items of the RecyclerView.
+
     @Override
     public void onBindViewHolder(final Adapter.MyView holder,
                                  final int position)
     {
 
-        // Set the text of each item of
-        // Recycler view with the list item
-
+        //Nastaví text a obrázek, každé položce v seznamu
         holder.textView.setText(list.get(position).slovo);
         holder.obrazek.setImageBitmap(list.get(position).bitmapa);
 
     }
 
-    // Override getItemCount which Returns
-    // the length of the RecyclerView.
+    // Vrátí délku recyclerView
     @Override
     public int getItemCount()
     {
@@ -106,14 +91,14 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-TextView textView
+TextView textView;
 
 
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 
-public interface onNoteListener{
-        void onNoteClick(int position);
 
-}
 
 }

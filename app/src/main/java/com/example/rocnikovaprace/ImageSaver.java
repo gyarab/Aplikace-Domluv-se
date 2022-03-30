@@ -5,14 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+//Třída, která se stará o ukládání obrázků
 public class ImageSaver {
 
     private String directoryName = "images";
@@ -23,7 +22,7 @@ public class ImageSaver {
     public ImageSaver(Context context) {
         this.context = context;
     }
-
+//Metoda, která nastaví jméno
     public ImageSaver setFileName(String fileName) {
         this.fileName = fileName;
         return this;
@@ -33,12 +32,12 @@ public class ImageSaver {
         this.external = external;
         return this;
     }
-
+//Nastaví jméno složce
     public ImageSaver setDirectoryName(String directoryName) {
         this.directoryName = directoryName;
         return this;
     }
-
+//Uloží obrázek
     public void save(Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
@@ -57,6 +56,7 @@ public class ImageSaver {
         }
     }
 
+    //Vytvoří soubor
     @NonNull
     private File createFile() {
         File directory;
@@ -67,7 +67,7 @@ public class ImageSaver {
             directory = context.getDir(directoryName, Context.MODE_PRIVATE);
         }
         if(!directory.exists() && !directory.mkdirs()){
-            Log.e("ImageSaver","Error creating directory " + directory);
+            Log.e("ImageSaver","Chyba při vytváření složky" + directory);
         }
 
         return new File(directory, fileName);
@@ -89,6 +89,7 @@ public class ImageSaver {
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 
+    //Načte obrázek
     public Bitmap load() {
         FileInputStream inputStream = null;
         try {

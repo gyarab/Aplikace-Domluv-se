@@ -15,30 +15,24 @@ import java.io.FileReader;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyView>{
-    // The adapter class which
-// extends RecyclerView Adapter
 
-
-        // List with String type
         private List<Slovicka> list;
 
-        // View Holder class which
-        // extends RecyclerView.ViewHolder
+
         public static class MyView
                 extends RecyclerView.ViewHolder {
 
-            // Text View
+
             TextView textView;
             ImageButton obrazek;
             CardView cardView;
 
-            // parameterised constructor for View Holder class
-            // which takes the view as a parameter
+            // Konstruktor s paramentrem View
             public MyView(View view)
             {
                 super(view);
 
-                // initialise TextView with id
+
                 textView = (TextView)view
                         .findViewById(R.id.textview);
 
@@ -54,16 +48,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyView>{
             }
         }
 
-        // Constructor for adapter class
-        // which takes a list of String type
+        //Další konstruktor
         public Adapter(List<Slovicka> horizontalList)
         {
             this.list = horizontalList;
         }
 
-        // Override onCreateViewHolder which deals
-        // with the inflation of the card layout
-        // as an item for the RecyclerView.
+        // Metoda, která se stará o rozložení a vzhled jednotlivých položek v seznamu
         @Override
         public MyView onCreateViewHolder(ViewGroup parent,
                                          int viewType)
@@ -81,25 +72,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyView>{
             return new MyView(itemView);
         }
 
-        // Override onBindViewHolder which deals
-        // with the setting of different data
-        // and methods related to clicks on
-        // particular items of the RecyclerView.
+
         @Override
         public void onBindViewHolder(final MyView holder,
                                      final int position)
         {
 
-            // Set the text of each item of
-            // Recycler view with the list items
-
+            //Nastaví text a obrázek
             holder.textView.setText(list.get(position).slovo);
             holder.obrazek.setImageBitmap(list.get(position).bitmapa);
 
         }
 
-        // Override getItemCount which Returns
-        // the length of the RecyclerView.
+        // Vrátí délku seznamu
         @Override
         public int getItemCount()
         {
