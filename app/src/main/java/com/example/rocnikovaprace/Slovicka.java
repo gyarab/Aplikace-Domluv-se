@@ -3,8 +3,8 @@ package com.example.rocnikovaprace;
 import android.graphics.Bitmap;
 
 public class Slovicka {
-    String slovo;
-    Bitmap bitmapa;
+    public String slovo;
+    public Bitmap bitmapa;
 
     //Konstruktor, aby bylo možné vytvořit objekty
     public Slovicka(String slovo, Bitmap bitmapa) {

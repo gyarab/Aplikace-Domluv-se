@@ -1,20 +1,23 @@
-package com.example.rocnikovaprace;
+package com.example.rocnikovaprace.ui.gallery;
 
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MyView>{
+import com.example.rocnikovaprace.R;
+import com.example.rocnikovaprace.Slovicka;
+
+
+public class StredniAdapter extends RecyclerView.Adapter<com.example.rocnikovaprace.Adapter.MyView>{
+
+
 
         private List<Slovicka> list;
 
@@ -23,8 +26,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyView>{
                 extends RecyclerView.ViewHolder {
 
 
-            public TextView textView;
-            public ImageButton obrazek;
+            TextView textView;
+            ImageButton obrazek;
             CardView cardView;
 
             // Konstruktor s paramentrem View
@@ -49,32 +52,32 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyView>{
         }
 
         //Další konstruktor
-        public Adapter(List<Slovicka> horizontalList)
+        public StredniAdapter(List<Slovicka> horizontalList)
         {
             this.list = horizontalList;
         }
 
         // Metoda, která se stará o rozložení a vzhled jednotlivých položek v seznamu
         @Override
-        public MyView onCreateViewHolder(ViewGroup parent,
-                                         int viewType)
+        public com.example.rocnikovaprace.Adapter.MyView onCreateViewHolder(ViewGroup parent,
+                                                                            int viewType)
         {
 
             // Inflate item.xml using LayoutInflator
             View itemView
                     = LayoutInflater
                     .from(parent.getContext())
-                    .inflate(R.layout.item,
+                    .inflate(R.layout.stredniitem,
                             parent,
                             false);
 
             // return itemView
-            return new MyView(itemView);
+            return new com.example.rocnikovaprace.Adapter.MyView(itemView);
         }
 
 
         @Override
-        public void onBindViewHolder(final MyView holder,
+        public void onBindViewHolder(final com.example.rocnikovaprace.Adapter.MyView holder,
                                      final int position)
         {
 
@@ -93,4 +96,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyView>{
 
 
 
-}
+    }
+
+
+
+
+
+
+
+
+
