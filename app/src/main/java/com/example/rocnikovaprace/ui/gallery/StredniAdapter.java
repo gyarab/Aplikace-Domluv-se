@@ -81,9 +81,9 @@ public class StredniAdapter extends RecyclerView.Adapter<com.example.rocnikovapr
                                      final int position)
         {
 
-            //Nastaví text a obrázek
             holder.textView.setText(list.get(position).slovo);
             holder.obrazek.setImageBitmap(list.get(position).bitmapa);
+
 
         }
 
