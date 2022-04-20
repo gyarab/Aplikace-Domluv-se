@@ -34,9 +34,5 @@
         android:name="com.example.rocnikovaprace.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
-    <fragment
-        android:id="@+id/vlozSlovo"
-        android:name="com.example.rocnikovaprace.VlozSlovo"
-        android:label="fragment_vloz_slovo"
-        tools:layout="@layout/fragment_vloz_slovo" />
+
 </navigation>

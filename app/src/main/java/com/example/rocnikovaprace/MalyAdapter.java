@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
+public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView> {
 
     private List<Slovicka> list;
 
@@ -29,12 +29,11 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
         CardView cardView;
 
         // Konstruktor s parametrem View
-        public MyView(View view)
-        {
+        public MyView(View view) {
             super(view);
 
             // initialise TextView with id
-            textView = (TextView)view
+            textView = (TextView) view
                     .findViewById(R.id.textview);
 
             obrazek = (ImageButton) view
@@ -44,22 +43,18 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
                     .findViewById(R.id.cardview);
 
 
-
-
         }
     }
 
     // Další konstruktor
-    public MalyAdapter(List<Slovicka> horizontalList)
-    {
+    public MalyAdapter(List<Slovicka> horizontalList) {
         this.list = horizontalList;
     }
 
 
     @Override
     public Adapter.MyView onCreateViewHolder(ViewGroup parent,
-                                             int viewType)
-    {
+                                             int viewType) {
 
         // Přiřazení rozložení a vzhledu položky v recyclerView
         View itemView
@@ -74,8 +69,7 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
 
     @Override
     public void onBindViewHolder(final Adapter.MyView holder,
-                                 final int position)
-    {
+                                 final int position) {
 
         //Nastaví text a obrázek, každé položce v seznamu
         holder.textView.setText(list.get(position).slovo);
@@ -85,20 +79,18 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView>{
 
     // Vrátí délku recyclerView
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-TextView textView;
+        TextView textView;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
-
 
 
 }

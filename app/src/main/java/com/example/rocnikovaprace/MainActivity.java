@@ -5,22 +5,22 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import com.example.rocnikovaprace.ui.gallery.VytvoreniHesla;
-import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import com.example.rocnikovaprace.databinding.ActivityMainBinding;
+import com.example.rocnikovaprace.ui.gallery.VytvoreniHesla;
+import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.BufferedReader;
@@ -102,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-  // Tato metoda se spustí po kliknutí na tlačítko uložit
-    public void Ulozit(View view){
+    // Tato metoda se spustí po kliknutí na tlačítko uložit
+    public void Ulozit(View view) {
         ImageButton imageButton = findViewById(R.id.imageButton);
         EditText editText = findViewById(R.id.Slovo);
         CheckBox slovicko = findViewById(R.id.Slovicko);
@@ -136,13 +136,12 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 //Prohlídne všechna slovíčka a pokud, už takové slovíčko existuje, upozorní na to uživatele
-        File oba = new File(getApplicationContext().getFilesDir(), "slovicka.txt");
         String zeSouboru;
-        try (BufferedReader br = new BufferedReader(new FileReader(oba))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((zeSouboru = br.readLine()) != null) {
                 if (nazev.equals(zeSouboru)) {
                     AlertDialog dialog = new AlertDialog.Builder(this)
-                            .setMessage("Toto slovíčko již existuje. Změnte název.")
+                            .setMessage("Toto slovíčko, nebo aktivita již existuje. Změňte název.")
                             .setPositiveButton("ok", null)
                             .show();
                     return;
@@ -153,22 +152,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Chyba při čtení ze souboru.");
         }
 
-//Prohlídne všechny aktivity a pokud, už taková aktivita existuje, upozorní na to uživatele
-        oba = new File(getApplicationContext().getFilesDir(), "aktivity.txt");
-        try (BufferedReader br = new BufferedReader(new FileReader(oba))) {
-            while ((zeSouboru = br.readLine()) != null) {
-                if (nazev.equals(zeSouboru)) {
-                    AlertDialog dialog = new AlertDialog.Builder(this)
-                            .setMessage("Toto slovíčko již existuje. Změnte název.")
-                            .setPositiveButton("ok", null)
-                            .show();
-                    return;
-                }
-
-            }
-        } catch (Exception e) {
-            System.out.println("Chyba při čtení ze souboru.");
-        }
 
 //Vezme obrázek z tlačítka a uložího ho
         BitmapDrawable drawable = (BitmapDrawable) imageButton.getDrawable();

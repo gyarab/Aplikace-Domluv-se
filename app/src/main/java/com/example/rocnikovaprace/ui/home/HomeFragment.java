@@ -19,7 +19,6 @@ import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.Slovicka;
 import com.example.rocnikovaprace.databinding.FragmentHomeBinding;
 import com.example.rocnikovaprace.ui.gallery.StredniAdapter;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -51,20 +50,20 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         recyclerView
-                =(RecyclerView)root.findViewById(
+                = (RecyclerView) root.findViewById(
                 R.id.recyclerview3);
         RecyclerViewLayoutManager
-                =new
+                = new
 
                 LinearLayoutManager(
                 getContext());
 
 
         recyclerView2
-                =(RecyclerView)root.findViewById(
+                = (RecyclerView) root.findViewById(
                 R.id.recyclerview2);
         RecyclerViewLayoutManager
-                =new
+                = new
 
                 LinearLayoutManager(
                 getContext());
@@ -82,12 +81,12 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         AddItemsToRecyclerViewArrayList2();
 
         // Zavolá konstruktor
-        adapter =new MalyAdapter(source);
-        adapter2 =new StredniAdapter(source2);
+        adapter = new MalyAdapter(source);
+        adapter2 = new StredniAdapter(source2);
 
         // Nastaví Horizontal Layout Manager pro Recycler view
         HorizontalLayout
-                =new
+                = new
 
                 LinearLayoutManager(
                 getActivity().
@@ -100,7 +99,7 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
 
         HorizontalLayout2
-                =new
+                = new
 
                 LinearLayoutManager(
                 getActivity().
@@ -117,13 +116,11 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         recyclerView2.setAdapter(adapter2);
 
 
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         ItemTouchHelper itemTouchHelper2 = new ItemTouchHelper(simpleCallback2);
         itemTouchHelper2.attachToRecyclerView(recyclerView2);
-
 
 
         return root;
@@ -135,7 +132,7 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         binding = null;
     }
 
-//Přidá položky do seznamu
+    //Přidá položky do seznamu
     public void AddItemsToRecyclerViewArrayList() {
         source = new ArrayList<>();
         File file = new File(getContext().getFilesDir(), "slovicka.txt");
@@ -162,7 +159,6 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         source2 = new ArrayList<>();
 
 
-
     }
 
 
@@ -184,8 +180,6 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
         }
     };
-
-
 
 
     ItemTouchHelper.SimpleCallback simpleCallback2 = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, ItemTouchHelper.DOWN) {
@@ -214,10 +208,6 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
         }
     };
-
-
-
-
 
 
 }

@@ -24,7 +24,8 @@ public class VytvoreniHesla extends AppCompatActivity {
         setContentView(R.layout.activity_vytvoreni_hesla);
 
     }
-//Tato metoda se spustí po kliknutí na tlačítko. Uloží  zadané heslo do souboru
+
+    //Tato metoda se spustí po kliknutí na tlačítko. Uloží  zadané heslo do souboru
     public void UlozHeslo(View view) {
         EditText editText = findViewById(R.id.Heslo);
         //Pokud uživatel nezadal heslo, zobrazí se mu tento dialog s připomínkou

@@ -1,24 +1,22 @@
 package com.example.rocnikovaprace;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rocnikovaprace.ui.gallery.StredniAdapter;
 
@@ -53,7 +51,7 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
         super.onDestroyView();
 
         File file = new File(getContext().getFilesDir(), "rozvrh.txt");
-        if(source2.size() > 0){
+        if (source2.size() > 0) {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
                 bw.write(source2.get(0).slovo);
                 bw.newLine();
@@ -66,17 +64,18 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
             }
 
         }
-        while (0<source2.size()){
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
-            bw.write(source2.get(0).slovo);
-            bw.newLine();
-            bw.flush();
-            source2.remove(0);
+        while (0 < source2.size()) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
+                bw.write(source2.get(0).slovo);
+                bw.newLine();
+                bw.flush();
+                source2.remove(0);
 
 
-        } catch (Exception e) {
-            System.out.println("Do souboru se nepovedlo zapsat.");
-        }}
+            } catch (Exception e) {
+                System.out.println("Do souboru se nepovedlo zapsat.");
+            }
+        }
     }
 
 
@@ -135,23 +134,21 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
         dialog.show();
 
 
-
-
         recyclerView
-                =(RecyclerView)view.findViewById(
+                = (RecyclerView) view.findViewById(
                 R.id.recyclerview103);
         RecyclerViewLayoutManager
-                =new
+                = new
 
                 LinearLayoutManager(
                 getContext());
 
 
         recyclerView2
-                =(RecyclerView)view.findViewById(
+                = (RecyclerView) view.findViewById(
                 R.id.recyclerview102);
         RecyclerViewLayoutManager
-                =new
+                = new
 
                 LinearLayoutManager(
                 getContext());
@@ -169,12 +166,12 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
         AddItemsToRecyclerViewArrayList2();
 
         // Zavolá konstruktor
-        adapter =new MalyAdapter(source);
-        adapter2 =new StredniAdapter(source2);
+        adapter = new MalyAdapter(source);
+        adapter2 = new StredniAdapter(source2);
 
         // Nastaví Horizontal Layout Manager pro Recycler view
         HorizontalLayout
-                =new
+                = new
 
                 LinearLayoutManager(
                 getActivity().
@@ -187,7 +184,7 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
 
 
         HorizontalLayout2
-                =new
+                = new
 
                 LinearLayoutManager(
                 getActivity().
@@ -204,15 +201,11 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
         recyclerView2.setAdapter(adapter2);
 
 
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
         ItemTouchHelper itemTouchHelper2 = new ItemTouchHelper(simpleCallback2);
         itemTouchHelper2.attachToRecyclerView(recyclerView2);
-
-
-
 
 
         return view;
@@ -289,8 +282,6 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
 
         }
     };
-
-
 
 
     ItemTouchHelper.SimpleCallback simpleCallback2 = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, ItemTouchHelper.DOWN) {

@@ -7,4 +7,25 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="svetlefialova">#B78BD4</color>
+    <color name="tmavefialova">#7C0AC8</color>
+    <color name="modrofialova">#9B58F9</color>
+    <color name="modrozelena">#06CB</color>
+    <color name="modra">#4E65FB</color>
+    <color name="svetlemodra">#7587FA</color>
+
+    <color name="green">#0F9D58</color>
+    <color name="orange">#F14405</color>
+    <color name="purple1000">#7D0552</color>
+    <color name="darkpink">#CA226B</color>
+    <color name="darkorange">#C04000</color>
+    <color name="sandy">#F4A460</color>
+    <color name="valentynred">#E55451</color>
+    <color name="tomato">#FF6347</color>
+    <color name="pastelviolet">#D291BC</color>
+
+    <color name="pinkcoral">#C48189</color>
+    <color name="ZkousimTo">#FF8D74</color>
+
 </resources>

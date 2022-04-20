@@ -11,15 +11,18 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.rocnikovaprace.MainActivity;
 import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.databinding.FragmentSlideshowBinding;
 import com.theartofdev.edmodo.cropper.CropImage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -78,11 +81,11 @@ public class SlideshowFragment extends Fragment {
                             System.out.println("Chyba při čtení ze souboru.");
                         }
 
-                        if (zeSouboru.equals(editText.getText().toString())){
-                        }
-                        else {
+                        if (zeSouboru.equals(editText.getText().toString())) {
+                        } else {
                             Intent i = new Intent(getContext(), MainActivity.class);
-                            startActivity(i);}
+                            startActivity(i);
+                        }
 
 
                     }
@@ -119,7 +122,8 @@ public class SlideshowFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-// Vytvoří dialog na výběr obrázku, má dvě možnosti, buď z galerie nebo z fotoaparátu. Poté dialog zobrazí.
+
+    // Vytvoří dialog na výběr obrázku, má dvě možnosti, buď z galerie nebo z fotoaparátu. Poté dialog zobrazí.
     private void showImagePicDialog() {
         String options[] = {"Fotoaparátu", "Galerie"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -204,8 +208,6 @@ public class SlideshowFragment extends Fragment {
         CropImage.activity().setAspectRatio(1, 1).start(getActivity());
 
     }
-
-
 
 
 }

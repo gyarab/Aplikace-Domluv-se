@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,7 +24,8 @@ public class ImageSaver {
     public ImageSaver(Context context) {
         this.context = context;
     }
-//Metoda, která nastaví jméno
+
+    //Metoda, která nastaví jméno
     public ImageSaver setFileName(String fileName) {
         this.fileName = fileName;
         return this;
@@ -32,12 +35,14 @@ public class ImageSaver {
         this.external = external;
         return this;
     }
-//Nastaví jméno složce
+
+    //Nastaví jméno složce
     public ImageSaver setDirectoryName(String directoryName) {
         this.directoryName = directoryName;
         return this;
     }
-//Uloží obrázek
+
+    //Uloží obrázek
     public void save(Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
@@ -60,14 +65,13 @@ public class ImageSaver {
     @NonNull
     private File createFile() {
         File directory;
-        if(external){
+        if (external) {
             directory = getAlbumStorageDir(directoryName);
-        }
-        else {
+        } else {
             directory = context.getDir(directoryName, Context.MODE_PRIVATE);
         }
-        if(!directory.exists() && !directory.mkdirs()){
-            Log.e("ImageSaver","Chyba při vytváření složky" + directory);
+        if (!directory.exists() && !directory.mkdirs()) {
+            Log.e("ImageSaver", "Chyba při vytváření složky" + directory);
         }
 
         return new File(directory, fileName);
