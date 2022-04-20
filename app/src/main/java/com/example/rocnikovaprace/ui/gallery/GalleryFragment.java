@@ -197,7 +197,7 @@ public class GalleryFragment extends Fragment {
             String s;
             int p = 0;
             while ((s = br.readLine()) != null) {
-                Bitmap bitmap = new ImageSaver(getContext()).setFileName(s + ".png").setDirectoryName("images").load();
+                Bitmap bitmap = new ImageSaver(getContext()).setFileName(s + ".png").setDirectoryName(file.getName()).load();
                 Slovicka slovo = new Slovicka(s, bitmap);
                 //Potom je přidá do ArrayListu
                 source.add(slovo);
@@ -237,7 +237,8 @@ public class GalleryFragment extends Fragment {
                     .setAction("Zpět", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bitmap bitmap2 = new ImageSaver(getContext()).setFileName(nazevslova + ".png").setDirectoryName("images").load();
+                            File file = new File(getContext().getFilesDir(), "slovicka.txt");
+                            Bitmap bitmap2 = new ImageSaver(getContext()).setFileName(nazevslova + ".png").setDirectoryName(file.getName()).load();
                             Slovicka slovo = new Slovicka(nazevslova, bitmap2);
                             source.add(position, slovo);
                             recyclerView.getAdapter().notifyItemInserted(position);

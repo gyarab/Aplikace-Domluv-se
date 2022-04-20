@@ -1,37 +1,38 @@
-package com.example.rocnikovaprace.ui.home;
+package com.example.rocnikovaprace;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProvider;
+
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rocnikovaprace.ImageSaver;
-import com.example.rocnikovaprace.MalyAdapter;
-import com.example.rocnikovaprace.R;
-import com.example.rocnikovaprace.Slovicka;
-import com.example.rocnikovaprace.databinding.FragmentHomeBinding;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+
 import com.example.rocnikovaprace.ui.gallery.StredniAdapter;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener {
+public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteListener {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
-
+    private OrganizaceViewModel mViewModel;
     RecyclerView recyclerView;
     RecyclerView recyclerView2;
     ArrayList<Slovicka> source;
@@ -43,16 +44,102 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
     LinearLayoutManager HorizontalLayout;
     LinearLayoutManager HorizontalLayout2;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+    public static OrganizaceFragment newInstance() {
+        return new OrganizaceFragment();
+    }
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        File file = new File(getContext().getFilesDir(), "rozvrh.txt");
+        if(source2.size() > 0){
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
+                bw.write(source2.get(0).slovo);
+                bw.newLine();
+                bw.flush();
+                source2.remove(0);
+
+
+            } catch (Exception e) {
+                System.out.println("Do souboru se nepovedlo zapsat.");
+            }
+
+        }
+        while (0<source2.size()){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
+            bw.write(source2.get(0).slovo);
+            bw.newLine();
+            bw.flush();
+            source2.remove(0);
+
+
+        } catch (Exception e) {
+            System.out.println("Do souboru se nepovedlo zapsat.");
+        }}
+    }
+
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.organizace_fragment, container, false);
+
+        // Vytvoří dialog pro zadání hesla, bez kterého se nedá vstoupit do tohoto fragmentu
+        AlertDialog.Builder builder
+                = new AlertDialog.Builder(getContext());
+        builder.setTitle("Zadejte heslo");
+
+        // Nastaví vzhled dialogu
+        final View customLayout
+                = getLayoutInflater()
+                .inflate(
+                        R.layout.heslodialog,
+                        null);
+        builder.setView(customLayout);
+        builder.setCancelable(false);
+        builder.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+
+                    //Ověří správnost hesla
+                    @Override
+                    public void onClick(
+                            DialogInterface dialog,
+                            int which) {
+                        EditText editText
+                                = customLayout
+                                .findViewById(
+                                        R.id.dialogoveheslo);
+                        String zeSouboru = "";
+                        File heslosoubor = new File(getContext().getFilesDir(), "heslo.txt");
+                        try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
+                            zeSouboru = br.readLine();
+                        } catch (Exception e) {
+                            System.out.println("Chyba při čtení ze souboru.");
+                        }
+//Pokud je heslo špatné vrátí uživatele na domovskou obrazovku
+                        if (zeSouboru.equals(editText.getText().toString())) {
+                        } else {
+                            Intent i = new Intent(getContext(), MainActivity.class);
+                            startActivity(i);
+                        }
+
+
+                    }
+                });
+
+        // Zobrazí dialog
+        AlertDialog dialog
+                = builder.create();
+        dialog.show();
+
+
+
+
         recyclerView
-                =(RecyclerView)root.findViewById(
-                R.id.recyclerview3);
+                =(RecyclerView)view.findViewById(
+                R.id.recyclerview103);
         RecyclerViewLayoutManager
                 =new
 
@@ -61,8 +148,8 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
 
         recyclerView2
-                =(RecyclerView)root.findViewById(
-                R.id.recyclerview2);
+                =(RecyclerView)view.findViewById(
+                R.id.recyclerview102);
         RecyclerViewLayoutManager
                 =new
 
@@ -126,19 +213,22 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
 
 
-        return root;
+
+
+        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(OrganizaceViewModel.class);
+        // TODO: Use the ViewModel
     }
 
-//Přidá položky do seznamu
+    //Přidá položky do seznamu
     public void AddItemsToRecyclerViewArrayList() {
         source = new ArrayList<>();
-        File file = new File(getContext().getFilesDir(), "slovicka.txt");
+        File file = new File(getContext().getFilesDir(), "aktivity.txt");
         //Načte slovíčka ze souboru
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String s;
@@ -160,8 +250,20 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
     public void AddItemsToRecyclerViewArrayList2() {
         source2 = new ArrayList<>();
-
-
+        File file = new File(getContext().getFilesDir(), "rozvrh.txt");
+        File file2 = new File(getContext().getFilesDir(), "aktivity.txt");
+        //Načte slovíčka ze souboru
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String s;
+            while ((s = br.readLine()) != null) {
+                Bitmap bitmap = new ImageSaver(getContext()).setFileName(s + ".png").setDirectoryName(file2.getName()).load();
+                Slovicka slovo = new Slovicka(s, bitmap);
+                //Přidá je do ArrayListu
+                source2.add(slovo);
+            }
+        } catch (Exception e) {
+            System.out.println("Chyba při čtení ze souboru.");
+        }
 
     }
 
@@ -177,9 +279,12 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
+            Slovicka sl = source.get(position);
             source2.add(source.get(position));
             source.remove(position);
             recyclerView.getAdapter().notifyItemRemoved(position);
+            source.add(position, sl);
+            recyclerView.getAdapter().notifyItemInserted(position);
             recyclerView2.getAdapter().notifyItemInserted(source2.size());
 
         }
@@ -206,19 +311,14 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
             int position = viewHolder.getAdapterPosition();
             Slovicka slovicka = source2.get(position);
-            source.add(slovicka);
+            //source.add(slovicka);
             source2.remove(position);
             recyclerView2.getAdapter().notifyItemRemoved(position);
-            recyclerView.getAdapter().notifyItemInserted(source.size());
+            //recyclerView.getAdapter().notifyItemInserted(source.size());
 
 
         }
     };
 
 
-
-
-
-
 }
-

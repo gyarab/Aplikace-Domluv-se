@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         } catch (Exception e) {
-            editText.setText("Chyba při čtení ze souboru.");
+            System.out.println("Chyba při čtení ze souboru.");
         }
 
 //Prohlídne všechny aktivity a pokud, už taková aktivita existuje, upozorní na to uživatele
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         } catch (Exception e) {
-            editText.setText("Chyba při čtení ze souboru.");
+            System.out.println("Chyba při čtení ze souboru.");
         }
 
 //Vezme obrázek z tlačítka a uložího ho
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap = drawable.getBitmap();
         new ImageSaver(this).
                 setFileName(nazev + ".png").
-                setDirectoryName("images").
+                setDirectoryName(file.getName()).
                 save(bitmap);
 //Uloží název slovíčka nabo aktivity
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
