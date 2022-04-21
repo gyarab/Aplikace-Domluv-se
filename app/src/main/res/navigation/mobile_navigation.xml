@@ -35,4 +35,10 @@
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
+    <fragment
+        android:id="@+id/nav_nastaveni"
+        android:name="com.example.rocnikovaprace.NastaveniFragment"
+        android:label="Nastavení"
+        tools:layout="@layout/fragment_nastaveni" />
+
 </navigation>
