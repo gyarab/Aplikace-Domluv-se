@@ -1,21 +1,26 @@
 package com.example.rocnikovaprace;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class AktivityFragment extends Fragment {
@@ -37,6 +42,38 @@ public class AktivityFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        String c = "";
+        File file = new File(getContext().getFilesDir(), "cislo.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            c =br.readLine();
+        } catch (Exception e) {
+            System.out.println("Chyba při čtení ze souboru.");
+        }
+
+
+
+
+
+
+        if(c.equals("ano")){
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
+                bw.write("ne");
+                bw.newLine();
+                bw.flush();
+
+            } catch (Exception e) {
+                System.out.println("Do souboru se nepovedlo zapsat.");
+            }
+
+            Intent i = new Intent(getContext(), MainActivity.class);
+            startActivity(i);
+
+
+
+        }
+
 
         View view = inflater.inflate(R.layout.aktivity_fragment, container, false);
 
@@ -113,5 +150,18 @@ public class AktivityFragment extends Fragment {
 
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //if (notifyFragmentExit()) return false;
+        switch(item.getItemId()){
+            case R.id.nav_nastaveni2:
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.nav_aktivity, NastaveniFragment.class, null).commit();
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

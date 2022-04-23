@@ -1,28 +1,38 @@
 package com.example.rocnikovaprace.ui.home;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rocnikovaprace.ImageSaver;
+import com.example.rocnikovaprace.MainActivity;
 import com.example.rocnikovaprace.MalyAdapter;
+import com.example.rocnikovaprace.NastaveniFragment;
 import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.Slovicka;
 import com.example.rocnikovaprace.databinding.FragmentHomeBinding;
 import com.example.rocnikovaprace.ui.gallery.StredniAdapter;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -44,10 +54,43 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        String c = "";
+        File file = new File(getContext().getFilesDir(), "cislo.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+             c =br.readLine();
+        } catch (Exception e) {
+            System.out.println("Chyba při čtení ze souboru.");
+        }
+
+
+
+
+
+
+        if(c.equals("ano")){
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
+                bw.write("ne");
+                bw.newLine();
+                bw.flush();
+
+            } catch (Exception e) {
+                System.out.println("Do souboru se nepovedlo zapsat.");
+            }
+
+            Intent i = new Intent(getContext(), MainActivity.class);
+            startActivity(i);
+
+
+
+        }
+
+
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
         View root = binding.getRoot();
         recyclerView
                 = (RecyclerView) root.findViewById(
@@ -131,6 +174,27 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         super.onDestroyView();
         binding = null;
     }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //if (notifyFragmentExit()) return false;
+        switch(item.getItemId()){
+            case R.id.nav_nastaveni2:
+                //FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                //transaction.show(new NastaveniFragment()).commit();
+                Bundle bundle = new Bundle();
+                Navigation.findNavController(getView()).navigate(R.id.nav_home, bundle);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
 
     //Přidá položky do seznamu
     public void AddItemsToRecyclerViewArrayList() {
