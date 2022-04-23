@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.rocnikovaprace.ui.gallery.RecyclerViewClickInterface;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,36 +46,7 @@ public class AktivityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        String c = "";
-        File file = new File(getContext().getFilesDir(), "cislo.txt");
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            c =br.readLine();
-        } catch (Exception e) {
-            System.out.println("Chyba při čtení ze souboru.");
-        }
 
-
-
-
-
-
-        if(c.equals("ano")){
-
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
-                bw.write("ne");
-                bw.newLine();
-                bw.flush();
-
-            } catch (Exception e) {
-                System.out.println("Do souboru se nepovedlo zapsat.");
-            }
-
-            Intent i = new Intent(getContext(), MainActivity.class);
-            startActivity(i);
-
-
-
-        }
 
 
         View view = inflater.inflate(R.layout.aktivity_fragment, container, false);
@@ -95,9 +69,15 @@ public class AktivityFragment extends Fragment {
         AddItemsToRecyclerViewArrayList();
 
         // Zavolá konstruktor
-        adapter = new
-
-                Adapter(source);
+        RecyclerViewClickInterface inter = new RecyclerViewClickInterface() {
+            @Override
+            public void setClick(int abc) {
+                source.remove(abc);
+                Toast.makeText(getContext(),"Position is"+abc,Toast.LENGTH_LONG).show();
+                adapter.notifyDataSetChanged();
+            }
+        };
+        adapter = new Adapter(source, getContext(), inter);
 
         // Nastaví Horizontal Layout Manager pro Recycler view
         HorizontalLayout
@@ -151,17 +131,6 @@ public class AktivityFragment extends Fragment {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //if (notifyFragmentExit()) return false;
-        switch(item.getItemId()){
-            case R.id.nav_nastaveni2:
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_aktivity, NastaveniFragment.class, null).commit();
 
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 }

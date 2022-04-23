@@ -54,37 +54,6 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        String c = "";
-        File file = new File(getContext().getFilesDir(), "cislo.txt");
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-             c =br.readLine();
-        } catch (Exception e) {
-            System.out.println("Chyba při čtení ze souboru.");
-        }
-
-
-
-
-
-
-        if(c.equals("ano")){
-
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
-                bw.write("ne");
-                bw.newLine();
-                bw.flush();
-
-            } catch (Exception e) {
-                System.out.println("Do souboru se nepovedlo zapsat.");
-            }
-
-            Intent i = new Intent(getContext(), MainActivity.class);
-            startActivity(i);
-
-
-
-        }
-
 
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
@@ -174,24 +143,6 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
         super.onDestroyView();
         binding = null;
     }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //if (notifyFragmentExit()) return false;
-        switch(item.getItemId()){
-            case R.id.nav_nastaveni2:
-                //FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                //transaction.show(new NastaveniFragment()).commit();
-                Bundle bundle = new Bundle();
-                Navigation.findNavController(getView()).navigate(R.id.nav_home, bundle);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
 
 
 

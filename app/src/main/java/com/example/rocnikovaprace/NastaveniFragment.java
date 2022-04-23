@@ -86,24 +86,8 @@ public class NastaveniFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_nastaveni, container, false);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //if (notifyFragmentExit()) return false;
-        switch(item.getItemId()){
-            case R.id.nav_nastaveni2:
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_nastaveni, NastaveniFragment.class, null).commit();
 
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
- /*@Override
-    public void onDestroyView() {
-     super.onDestroyView();
-     Intent i = new Intent(getContext(), MainActivity.class);
-     startActivity(i);
- }*/
+
 
 
 

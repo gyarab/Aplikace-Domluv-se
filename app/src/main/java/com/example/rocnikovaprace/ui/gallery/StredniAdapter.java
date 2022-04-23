@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -26,7 +27,7 @@ public class StredniAdapter extends RecyclerView.Adapter<com.example.rocnikovapr
 
 
         TextView textView;
-        ImageButton obrazek;
+        ImageView obrazek;
         CardView cardView;
 
         // Konstruktor s paramentrem View
@@ -37,7 +38,7 @@ public class StredniAdapter extends RecyclerView.Adapter<com.example.rocnikovapr
             textView = (TextView) view
                     .findViewById(R.id.textview);
 
-            obrazek = (ImageButton) view
+            obrazek = (ImageView) view
                     .findViewById(R.id.obrazek);
 
             cardView = (CardView) view

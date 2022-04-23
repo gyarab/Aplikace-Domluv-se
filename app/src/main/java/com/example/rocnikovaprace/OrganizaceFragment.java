@@ -85,47 +85,6 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-
-        String c = "";
-        File file = new File(getContext().getFilesDir(), "cislo.txt");
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            c =br.readLine();
-        } catch (Exception e) {
-            System.out.println("Chyba při čtení ze souboru.");
-        }
-
-
-
-
-
-
-        if(c.equals("ano")){
-
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, false))) {
-                bw.write("ne");
-                bw.newLine();
-                bw.flush();
-
-            } catch (Exception e) {
-                System.out.println("Do souboru se nepovedlo zapsat.");
-            }
-
-            Intent i = new Intent(getContext(), MainActivity.class);
-            startActivity(i);
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
         View view = inflater.inflate(R.layout.organizace_fragment, container, false);
 
         // Vytvoří dialog pro zadání hesla, bez kterého se nedá vstoupit do tohoto fragmentu
@@ -355,18 +314,7 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
         }
     };
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //if (notifyFragmentExit()) return false;
-        switch(item.getItemId()){
-            case R.id.nav_nastaveni2:
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_organizace, NastaveniFragment.class, null).commit();
 
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

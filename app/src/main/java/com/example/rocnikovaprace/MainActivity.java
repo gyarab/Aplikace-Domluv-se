@@ -23,9 +23,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.rocnikovaprace.databinding.ActivityMainBinding;
 import com.example.rocnikovaprace.ui.gallery.VytvoreniHesla;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.BufferedReader;
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_aktivity, R.id.nav_organizace)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_aktivity, R.id.nav_organizace, R.id.nav_nastaveni)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //if (notifyFragmentExit()) return false;
         switch(item.getItemId()){
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 
 
@@ -202,6 +205,50 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void ZmenitHeslo (View view) {
+        String zeSouboru = "";
+        File heslosoubor = new File(getApplicationContext().getFilesDir(), "heslo.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
+            zeSouboru = br.readLine();
+        } catch (Exception e) {
+            System.out.println("Chyba při čtení ze souboru.");
+        }
+
+
+
+        EditText editText2 = findViewById(R.id.editheslo);
+        if(zeSouboru.equals(editText2.getText().toString())){
+
+            EditText editText = findViewById(R.id.editnoveheslo);
+            //Zapíše heslo do souboru
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(heslosoubor, false))) {
+                bw.write(editText.getText().toString());
+                bw.newLine();
+                bw.flush();
+                editText.setText("");
+                editText2.setText("");
+
+                Snackbar.make(getCurrentFocus(),"Heslo bylo změněno", Snackbar.LENGTH_LONG).show();
+
+
+            } catch (Exception e) {
+                editText.setText("Do souboru se nepovedlo zapsat.");
+            }
+        }
+        else {
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setMessage("Nesprávné heslo")
+                        .setPositiveButton("ok", null)
+                        .show();
+                return;
+
+
+        }
+
+    }
+
+
 
 
 }

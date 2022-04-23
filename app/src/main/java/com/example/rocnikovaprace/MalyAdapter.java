@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,7 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView> {
 
 
         TextView textView;
-        ImageButton obrazek;
+        ImageView obrazek;
         CardView cardView;
 
         // Konstruktor s parametrem View
@@ -36,7 +37,7 @@ public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView> {
             textView = (TextView) view
                     .findViewById(R.id.textview);
 
-            obrazek = (ImageButton) view
+            obrazek = (ImageView) view
                     .findViewById(R.id.obrazek);
 
             cardView = (CardView) view
