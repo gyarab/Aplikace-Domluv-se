@@ -213,6 +213,7 @@ public class SlideshowFragment extends Fragment {
 
     // Tady se vybere obrázek z galerie a nastaví se oříznutí na čtverec
     private void pickFromGallery() {
+
         CropImage.activity().setAspectRatio(1, 1).start(getActivity());
 
     }

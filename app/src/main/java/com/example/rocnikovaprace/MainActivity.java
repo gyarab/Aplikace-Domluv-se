@@ -124,7 +124,28 @@ public class MainActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-                ImageButton imageButton = findViewById(R.id.imageButton);
+                ImageButton imageButton;
+                String zeSouboru = "";
+                File heslosoubor = new File(getApplicationContext().getFilesDir(), "zkouska.txt");
+                try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
+                    zeSouboru = br.readLine().toString();
+                } catch (Exception e) {
+                    System.out.println("Chyba při čtení ze souboru.");
+                }
+                imageButton = findViewById(R.id.imageButton);
+                if(zeSouboru.equals("ne")){
+                    imageButton = findViewById(R.id.imageButtonnove);}
+
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(heslosoubor, false))) {
+                    bw.write("ano");
+                    bw.newLine();
+                    bw.flush();
+
+                } catch (Exception e) {
+                    System.out.println("Do +souboru se nepovedlo zapsat.");
+                }
+
+
                 Picasso.with(this).load(resultUri).into(imageButton);
             }
         }
