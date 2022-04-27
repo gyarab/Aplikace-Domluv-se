@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_aktivity"
-        android:name="com.example.rocnikovaprace.Aktivity"
+        android:name="com.example.rocnikovaprace.ui.Aktivity.Aktivity"
         android:label="Rozvrh"
         tools:layout="@layout/aktivity_fragment" />
 
