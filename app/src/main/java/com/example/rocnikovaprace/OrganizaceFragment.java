@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -271,7 +269,7 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
             return false;
         }
 
-        //Po přetáhnutí nahoru, nebo dolu smaže položku ze seznamu
+        //Po přetáhnutí přidáá tuto položku do vrchního seznamu
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
@@ -293,13 +291,12 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
 
             int fromPosition = viewHolder.getAdapterPosition();
             int toPosition = target.getAdapterPosition();
-
             Collections.swap(source2, fromPosition, toPosition);
             recyclerView2.getAdapter().notifyItemMoved(fromPosition, toPosition);
             return false;
         }
 
-        //Po přetáhnutí nahoru, nebo dolu smaže položku ze seznamu
+
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
@@ -313,8 +310,6 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
 
         }
     };
-
-
 
 
 }

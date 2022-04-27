@@ -1,9 +1,7 @@
 package com.example.rocnikovaprace.ui.gallery;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -13,12 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -32,7 +28,6 @@ import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.Slovicka;
 import com.example.rocnikovaprace.databinding.FragmentGalleryBinding;
 import com.google.android.material.snackbar.Snackbar;
-import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -119,7 +114,6 @@ public class GalleryFragment extends Fragment {
         dialog.show();
 
 
-
         recyclerView
                 = (RecyclerView) root.findViewById(
                 R.id.recyclerview);
@@ -169,7 +163,6 @@ public class GalleryFragment extends Fragment {
                 editText.setHint(source.get(abc).slovo.toString());
 
 
-
                 builder.setView(customLayout);
                 builder.setCancelable(true);
                 builder.setPositiveButton(
@@ -194,8 +187,8 @@ public class GalleryFragment extends Fragment {
                                     }
                                     p++;
                                 }
-
-                                if(editText.getText() == null|| editText.getText().toString().equals("")){
+                                // Pokud uživatel nezadal název slovíčka, vytvoří dialog, který ho na to upozorní
+                                if (editText.getText() == null || editText.getText().toString().equals("")) {
                                     AlertDialog dialog2 = new AlertDialog.Builder(getContext())
                                             .setMessage("Zadejte název slovíčka")
                                             .setPositiveButton("ok", null)
@@ -221,26 +214,6 @@ public class GalleryFragment extends Fragment {
                             }
                         });
 
-                imageButton
-                        = customLayout
-                        .findViewById(
-                                R.id.imageButtonnove);
-                imageButton.setBackgroundResource(R.drawable.kliknutimvloziteobrazek);
-                imageButton.setImageResource(R.drawable.kliknutimvloziteobrazek);
-                imageButton.setImageBitmap(source.get(abc).bitmapa);
-
-
-// povolení galerie a fotoaparátu
-                cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
-// Po kliknutí se začíná vybírat obrázek
-                imageButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        showImagePicDialog();
-                    }
-                });
 
                 // Zobrazí dialog
                 AlertDialog dialog
@@ -378,93 +351,5 @@ public class GalleryFragment extends Fragment {
         }
     };
 
-    // Vytvoří dialog na výběr obrázku, má dvě možnosti, buď z galerie nebo z fotoaparátu. Poté dialog zobrazí.
-    private void showImagePicDialog() {
-
-        String options[] = {"Fotoaparátu", "Galerie"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Vyberte obrázek z");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
-                    if (!checkCameraPermission()) {
-                        requestCameraPermission();
-                    } else {
-                        pickFromGallery();
-                    }
-                } else if (which == 1) {
-                    if (!checkStoragePermission()) {
-                        requestStoragePermission();
-                    } else {
-                        pickFromGallery();
-                    }
-                }
-            }
-        });
-        builder.create().show();
-    }
-
-
-    // kontrola oprávnění úložiště
-    private Boolean checkStoragePermission() {
-        boolean result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result;
-    }
-
-    // Žádost o povolení galerie
-    private void requestStoragePermission() {
-        requestPermissions(storagePermission, STORAGE_REQUEST);
-    }
-
-    // kontrola oprávnění fotoaparátu
-    private Boolean checkCameraPermission() {
-        boolean result = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-        return result && result1;
-    }
-
-    // Žádost o povolení fotoaparátu
-    private void requestCameraPermission() {
-        requestPermissions(cameraPermission, CAMERA_REQUEST);
-    }
-
-    // Žádost o povolení fotoaparátu a galerie, pokud ještě není dáno
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case CAMERA_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean camera_accepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeStorageaccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (camera_accepted && writeStorageaccepted) {
-                        pickFromGallery();
-                    } else {
-                        Toast.makeText(getContext(), "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
-            case STORAGE_REQUEST: {
-                if (grantResults.length > 0) {
-                    boolean writeStorageaccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (writeStorageaccepted) {
-                        pickFromGallery();
-                    } else {
-                        Toast.makeText(getContext(), "Please Enable Storage Permissions", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-            break;
-        }
-    }
-
-    // Tady se vybere obrázek z galerie a nastaví se oříznutí na čtverec
-    private void pickFromGallery() {
-        CropImage.activity().setAspectRatio(1, 1).start(getActivity());
-
-
-    }
 
 }

@@ -1,18 +1,14 @@
 package com.example.rocnikovaprace;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,10 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rocnikovaprace.ui.gallery.RecyclerViewClickInterface;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class AktivityFragment extends Fragment {
@@ -45,8 +39,6 @@ public class AktivityFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-
 
 
         View view = inflater.inflate(R.layout.aktivity_fragment, container, false);
@@ -72,9 +64,7 @@ public class AktivityFragment extends Fragment {
         RecyclerViewClickInterface inter = new RecyclerViewClickInterface() {
             @Override
             public void setClick(int abc) {
-                source.remove(abc);
-                Toast.makeText(getContext(),"Position is"+abc,Toast.LENGTH_LONG).show();
-                adapter.notifyDataSetChanged();
+
             }
         };
         adapter = new Adapter(source, getContext(), inter);
@@ -129,8 +119,6 @@ public class AktivityFragment extends Fragment {
 
 
     }
-
-
 
 
 }

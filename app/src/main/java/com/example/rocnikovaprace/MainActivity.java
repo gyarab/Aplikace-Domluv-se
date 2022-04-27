@@ -1,29 +1,24 @@
 package com.example.rocnikovaprace;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rocnikovaprace.databinding.ActivityMainBinding;
 import com.example.rocnikovaprace.ui.gallery.VytvoreniHesla;
@@ -31,6 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -91,23 +87,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //if (notifyFragmentExit()) return false;
-        switch(item.getItemId()){
-            case R.id.nav_nastaveni2:
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.nav_host_fragment_content_main, NastaveniFragment.class, null).commit();
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
-
-
-
-
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -124,28 +103,7 @@ public class MainActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-                ImageButton imageButton;
-                String zeSouboru = "";
-                File heslosoubor = new File(getApplicationContext().getFilesDir(), "zkouska.txt");
-                try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
-                    zeSouboru = br.readLine().toString();
-                } catch (Exception e) {
-                    System.out.println("Chyba při čtení ze souboru.");
-                }
-                imageButton = findViewById(R.id.imageButton);
-                if(zeSouboru.equals("ne")){
-                    imageButton = findViewById(R.id.imageButtonnove);}
-
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(heslosoubor, false))) {
-                    bw.write("ano");
-                    bw.newLine();
-                    bw.flush();
-
-                } catch (Exception e) {
-                    System.out.println("Do +souboru se nepovedlo zapsat.");
-                }
-
-
+                ImageButton imageButton = findViewById(R.id.imageButton);
                 Picasso.with(this).load(resultUri).into(imageButton);
             }
         }
@@ -227,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void ZmenitHeslo (View view) {
+    public void ZmenitHeslo(View view) {
         String zeSouboru = "";
         File heslosoubor = new File(getApplicationContext().getFilesDir(), "heslo.txt");
         try (BufferedReader br = new BufferedReader(new FileReader(heslosoubor))) {
@@ -237,9 +195,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         EditText editText2 = findViewById(R.id.editheslo);
-        if(zeSouboru.equals(editText2.getText().toString())){
+        if (zeSouboru.equals(editText2.getText().toString())) {
 
             EditText editText = findViewById(R.id.editnoveheslo);
             //Zapíše heslo do souboru
@@ -250,26 +207,23 @@ public class MainActivity extends AppCompatActivity {
                 editText.setText("");
                 editText2.setText("");
 
-                Snackbar.make(getCurrentFocus(),"Heslo bylo změněno", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getCurrentFocus(), "Heslo bylo změněno", Snackbar.LENGTH_LONG).show();
 
 
             } catch (Exception e) {
                 editText.setText("Do souboru se nepovedlo zapsat.");
             }
-        }
-        else {
-                AlertDialog dialog = new AlertDialog.Builder(this)
-                        .setMessage("Nesprávné heslo")
-                        .setPositiveButton("ok", null)
-                        .show();
-                return;
+        } else {
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setMessage("Nesprávné heslo")
+                    .setPositiveButton("ok", null)
+                    .show();
+            return;
 
 
         }
 
     }
-
-
 
 
 }

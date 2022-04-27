@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -17,20 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rocnikovaprace.MainActivity;
-import com.example.rocnikovaprace.NastaveniFragment;
 import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.databinding.FragmentSlideshowBinding;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 
 public class SlideshowFragment extends Fragment {
 
@@ -45,7 +40,6 @@ public class SlideshowFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
 
 
         slideshowViewModel =
@@ -217,9 +211,6 @@ public class SlideshowFragment extends Fragment {
         CropImage.activity().setAspectRatio(1, 1).start(getActivity());
 
     }
-
-
-
 
 
 }
