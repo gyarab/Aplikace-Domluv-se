@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace;
+package com.example.rocnikovaprace.ui.Aktivity;
 
 import androidx.lifecycle.ViewModel;
 

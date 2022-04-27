@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace.ui.gallery;
+package com.example.rocnikovaprace.ui.SpravujSlovicka;
 
 public interface RecyclerViewClickInterface {
     public void setClick(int abc);

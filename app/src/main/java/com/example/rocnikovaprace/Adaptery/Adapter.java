@@ -1,5 +1,7 @@
-package com.example.rocnikovaprace.ui.gallery;
+package com.example.rocnikovaprace.Adaptery;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.Slovicka;
+import com.example.rocnikovaprace.ui.SpravujSlovicka.RecyclerViewClickInterface;
 
 import java.util.List;
 
-
-public class StredniAdapter extends RecyclerView.Adapter<com.example.rocnikovaprace.Adapter.MyView> {
-
+public class Adapter extends RecyclerView.Adapter<Adapter.MyView> {
 
     private List<Slovicka> list;
-
+    RecyclerViewClickInterface recyclerViewClickInterface;
+    Context context;
 
     public static class MyView
             extends RecyclerView.ViewHolder {
 
 
-        TextView textView;
-        ImageView obrazek;
-        CardView cardView;
+        public TextView textView;
+        public ImageView obrazek;
+        public CardView cardView;
 
         // Konstruktor s paramentrem View
         public MyView(View view) {
@@ -48,34 +50,43 @@ public class StredniAdapter extends RecyclerView.Adapter<com.example.rocnikovapr
     }
 
     //Další konstruktor
-    public StredniAdapter(List<Slovicka> horizontalList) {
+    public Adapter(List<Slovicka> horizontalList, Context context, RecyclerViewClickInterface recyclerViewClickInterface) {
         this.list = horizontalList;
+        this.context = context;
+        this.recyclerViewClickInterface = recyclerViewClickInterface;
     }
 
     // Metoda, která se stará o rozložení a vzhled jednotlivých položek v seznamu
     @Override
-    public com.example.rocnikovaprace.Adapter.MyView onCreateViewHolder(ViewGroup parent,
-                                                                        int viewType) {
+    public MyView onCreateViewHolder(ViewGroup parent,
+                                     int viewType) {
 
         // Inflate item.xml using LayoutInflator
         View itemView
                 = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.stredniitem,
+                .inflate(R.layout.item,
                         parent,
                         false);
 
         // return itemView
-        return new com.example.rocnikovaprace.Adapter.MyView(itemView);
+        return new MyView(itemView);
     }
 
 
     @Override
-    public void onBindViewHolder(final com.example.rocnikovaprace.Adapter.MyView holder,
-                                 final int position) {
+    public void onBindViewHolder(final MyView holder, @SuppressLint("RecyclerView") final int position) {
 
+        //Nastaví text a obrázek
         holder.textView.setText(list.get(position).slovo);
         holder.obrazek.setImageBitmap(list.get(position).bitmapa);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewClickInterface.setClick(position);
+            }
+        });
 
 
     }
@@ -88,12 +99,3 @@ public class StredniAdapter extends RecyclerView.Adapter<com.example.rocnikovapr
 
 
 }
-
-
-
-
-
-
-
-
-

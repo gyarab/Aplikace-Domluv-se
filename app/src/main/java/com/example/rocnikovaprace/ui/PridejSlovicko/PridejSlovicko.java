@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace.ui.slideshow;
+package com.example.rocnikovaprace.ui.PridejSlovicko;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -27,7 +27,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class SlideshowFragment extends Fragment {
+public class PridejSlovicko extends Fragment {
 
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
@@ -35,15 +35,15 @@ public class SlideshowFragment extends Fragment {
     String storagePermission[];
     ImageButton imageButton;
 
-    private SlideshowViewModel slideshowViewModel;
+    private PridejSlovickoViewModel pridejSlovickoViewModel;
     private FragmentSlideshowBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
 
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        pridejSlovickoViewModel =
+                new ViewModelProvider(this).get(PridejSlovickoViewModel.class);
 
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RocnikovaPrace">
         <activity
-            android:name=".ui.gallery.VytvoreniHesla"
+            android:name=".ui.SpravujSlovicka.VytvoreniHesla"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rocnikovaprace.Adaptery.Adapter;
+
 import java.util.List;
 
 public class MalyAdapter extends RecyclerView.Adapter<Adapter.MyView> {

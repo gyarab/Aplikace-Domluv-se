@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace;
+package com.example.rocnikovaprace.ui.Aktivity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -13,14 +13,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rocnikovaprace.ui.gallery.RecyclerViewClickInterface;
+import com.example.rocnikovaprace.Adaptery.Adapter;
+import com.example.rocnikovaprace.ImageSaver;
+import com.example.rocnikovaprace.R;
+import com.example.rocnikovaprace.Slovicka;
+import com.example.rocnikovaprace.ui.SpravujSlovicka.RecyclerViewClickInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-public class AktivityFragment extends Fragment {
+public class Aktivity extends Fragment {
 
     private AktivityViewModel mViewModel;
     String nazevslova = "";
@@ -32,8 +36,8 @@ public class AktivityFragment extends Fragment {
     Adapter adapter;
     LinearLayoutManager HorizontalLayout;
 
-    public static AktivityFragment newInstance() {
-        return new AktivityFragment();
+    public static Aktivity newInstance() {
+        return new Aktivity();
     }
 
     @Override

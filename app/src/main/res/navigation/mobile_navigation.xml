@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.rocnikovaprace.ui.home.HomeFragment"
+        android:name="com.example.rocnikovaprace.ui.Zacni.Zacni"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_aktivity"
-        android:name="com.example.rocnikovaprace.AktivityFragment"
+        android:name="com.example.rocnikovaprace.Aktivity"
         android:label="Rozvrh"
         tools:layout="@layout/aktivity_fragment" />
 
     <fragment
         android:id="@+id/nav_organizace"
-        android:name="com.example.rocnikovaprace.OrganizaceFragment"
+        android:name="com.example.rocnikovaprace.ui.Organizace.Organizace"
         android:label="Vytvoř rozvrh"
         tools:layout="@layout/organizace_fragment" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.rocnikovaprace.ui.gallery.GalleryFragment"
+        android:name="com.example.rocnikovaprace.ui.SpravujSlovicka.SpravujSlovicka"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.rocnikovaprace.ui.slideshow.SlideshowFragment"
+        android:name="com.example.rocnikovaprace.ui.PridejSlovicko.PridejSlovicko"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_nastaveni"
-        android:name="com.example.rocnikovaprace.NastaveniFragment"
+        android:name="com.example.rocnikovaprace.ui.Nastaveni.Nastaveni"
         android:label="Nastavení"
         tools:layout="@layout/fragment_nastaveni" />
 

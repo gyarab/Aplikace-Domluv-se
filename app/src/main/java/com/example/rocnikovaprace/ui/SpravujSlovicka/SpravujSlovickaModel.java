@@ -1,14 +1,14 @@
-package com.example.rocnikovaprace.ui.gallery;
+package com.example.rocnikovaprace.ui.SpravujSlovicka;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class SpravujSlovickaModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public SpravujSlovickaModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }

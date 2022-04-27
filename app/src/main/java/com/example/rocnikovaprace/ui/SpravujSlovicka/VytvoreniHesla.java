@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace.ui.gallery;
+package com.example.rocnikovaprace.ui.SpravujSlovicka;
 
 import android.content.Intent;
 import android.os.Bundle;

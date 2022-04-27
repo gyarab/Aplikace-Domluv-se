@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace;
+package com.example.rocnikovaprace.ui.Organizace;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +18,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rocnikovaprace.ui.gallery.StredniAdapter;
+import com.example.rocnikovaprace.ImageSaver;
+import com.example.rocnikovaprace.MainActivity;
+import com.example.rocnikovaprace.MalyAdapter;
+import com.example.rocnikovaprace.R;
+import com.example.rocnikovaprace.Slovicka;
+import com.example.rocnikovaprace.Adaptery.StredniAdapter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +33,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteListener {
+public class Organizace extends Fragment implements MalyAdapter.onNoteListener {
 
     private OrganizaceViewModel mViewModel;
     RecyclerView recyclerView;
@@ -42,8 +47,8 @@ public class OrganizaceFragment extends Fragment implements MalyAdapter.onNoteLi
     LinearLayoutManager HorizontalLayout;
     LinearLayoutManager HorizontalLayout2;
 
-    public static OrganizaceFragment newInstance() {
-        return new OrganizaceFragment();
+    public static Organizace newInstance() {
+        return new Organizace();
     }
 
     @Override

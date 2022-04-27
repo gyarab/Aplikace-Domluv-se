@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace.ui.home;
+package com.example.rocnikovaprace.ui.Zacni;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import com.example.rocnikovaprace.MalyAdapter;
 import com.example.rocnikovaprace.R;
 import com.example.rocnikovaprace.Slovicka;
 import com.example.rocnikovaprace.databinding.FragmentHomeBinding;
-import com.example.rocnikovaprace.ui.gallery.StredniAdapter;
+import com.example.rocnikovaprace.Adaptery.StredniAdapter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,10 +26,10 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener {
+public class Zacni extends Fragment implements MalyAdapter.onNoteListener {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private ZacniViewModel zacniViewModel;
+    private @NonNull FragmentHomeBinding binding;
 
     RecyclerView recyclerView;
     RecyclerView recyclerView2;
@@ -45,8 +45,8 @@ public class HomeFragment extends Fragment implements MalyAdapter.onNoteListener
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        zacniViewModel =
+                new ViewModelProvider(this).get(ZacniViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 

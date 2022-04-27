@@ -1,4 +1,4 @@
-package com.example.rocnikovaprace.ui.gallery;
+package com.example.rocnikovaprace.ui.SpravujSlovicka;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rocnikovaprace.Adapter;
+import com.example.rocnikovaprace.Adaptery.Adapter;
 import com.example.rocnikovaprace.ImageSaver;
 import com.example.rocnikovaprace.MainActivity;
 import com.example.rocnikovaprace.R;
@@ -38,10 +38,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GalleryFragment extends Fragment {
+public class SpravujSlovicka extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
-    private FragmentGalleryBinding binding;
+    private SpravujSlovickaModel spravujSlovickaModel;
+    private @NonNull FragmentGalleryBinding binding;
     String nazevslova = "";
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
@@ -58,8 +58,8 @@ public class GalleryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
 
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        spravujSlovickaModel =
+                new ViewModelProvider(this).get(SpravujSlovickaModel.class);
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
