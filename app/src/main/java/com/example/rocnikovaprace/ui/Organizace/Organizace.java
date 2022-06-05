@@ -93,7 +93,7 @@ public class Organizace extends Fragment implements MalyAdapter.onNoteListener {
         // Vytvoří dialog pro zadání hesla, bez kterého se nedá vstoupit do tohoto fragmentu
         AlertDialog.Builder builder
                 = new AlertDialog.Builder(getContext());
-        builder.setTitle("Zadejte heslo");
+        builder.setTitle(getString(R.string.zadejte_heslo));
 
         // Nastaví vzhled dialogu
         final View customLayout

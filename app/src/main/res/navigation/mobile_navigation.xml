@@ -14,13 +14,13 @@
     <fragment
         android:id="@+id/nav_aktivity"
         android:name="com.example.rocnikovaprace.ui.Aktivity.Aktivity"
-        android:label="Rozvrh"
+        android:label="@string/rozvrh"
         tools:layout="@layout/aktivity_fragment" />
 
     <fragment
         android:id="@+id/nav_organizace"
         android:name="com.example.rocnikovaprace.ui.Organizace.Organizace"
-        android:label="Vytvoř rozvrh"
+        android:label="@string/vytvor_rozvrh"
         tools:layout="@layout/organizace_fragment" />
 
     <fragment
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/nav_nastaveni"
         android:name="com.example.rocnikovaprace.ui.Nastaveni.Nastaveni"
-        android:label="Nastavení"
+        android:label="@string/nastaveni"
         tools:layout="@layout/fragment_nastaveni" />
 
 </navigation>

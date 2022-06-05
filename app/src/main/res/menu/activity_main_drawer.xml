@@ -12,7 +12,7 @@
         <item
             android:id="@+id/nav_aktivity"
             android:icon="@android:drawable/ic_media_play"
-            android:title="Rozvrh" />
+            android:title="@string/rozvrh" />
 
         <item
             android:id="@+id/nav_slideshow"
@@ -27,12 +27,12 @@
         <item
             android:id="@+id/nav_organizace"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Vytvoř rozvrh" />
+            android:title="@string/vytvor_rozvrh" />
 
         <item
             android:id="@+id/nav_nastaveni"
             android:icon="@android:drawable/ic_menu_manage"
-            android:title="Nastavení" />
+            android:title="@string/nastaveni" />
 
 
     </group>

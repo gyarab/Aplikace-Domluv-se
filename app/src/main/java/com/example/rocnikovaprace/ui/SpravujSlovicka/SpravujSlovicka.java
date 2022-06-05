@@ -67,7 +67,7 @@ public class SpravujSlovicka extends Fragment {
         // Vytvoří dialog pro zadání hesla, bez kterého se nedá vstoupit do tohoto fragmentu
         AlertDialog.Builder builder
                 = new AlertDialog.Builder(getContext());
-        builder.setTitle("Zadejte heslo");
+        builder.setTitle(getString(R.string.zadejte_heslo));
 
         // Nastaví vzhled dialogu
         final View customLayout
@@ -166,7 +166,7 @@ public class SpravujSlovicka extends Fragment {
                 builder.setView(customLayout);
                 builder.setCancelable(true);
                 builder.setPositiveButton(
-                        "Uložit změny",
+                        getString(R.string.ulozit_zmeny),
                         new DialogInterface.OnClickListener() {
 
                             //Ověří správnost hesla
@@ -180,7 +180,7 @@ public class SpravujSlovicka extends Fragment {
                                 while (p < source.size()) {
                                     if (editText.getText().toString().equals(source.get(p).slovo.toString()) && p != abc) {
                                         AlertDialog dialog2 = new AlertDialog.Builder(getContext())
-                                                .setMessage("Toto slovíčko již existuje. Změňte název.")
+                                                .setMessage(getString(R.string.vyzva1))
                                                 .setPositiveButton("ok", null)
                                                 .show();
                                         return;
@@ -190,7 +190,7 @@ public class SpravujSlovicka extends Fragment {
                                 // Pokud uživatel nezadal název slovíčka, vytvoří dialog, který ho na to upozorní
                                 if (editText.getText() == null || editText.getText().toString().equals("")) {
                                     AlertDialog dialog2 = new AlertDialog.Builder(getContext())
-                                            .setMessage("Zadejte název slovíčka")
+                                            .setMessage(getString(R.string.vyzva2))
                                             .setPositiveButton("ok", null)
                                             .show();
                                     return;
@@ -334,7 +334,7 @@ public class SpravujSlovicka extends Fragment {
             recyclerView.getAdapter().notifyItemRemoved(position);
             //Vytvoří SnacBar s tlačítkem zpět, které umožňuje vrátit smazanou položku zpět
             Snackbar.make(recyclerView, nazevslova, Snackbar.LENGTH_LONG)
-                    .setAction("Zpět", new View.OnClickListener() {
+                    .setAction(getString(R.string.zpet), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             File file = new File(getContext().getFilesDir(), "slovicka.txt");

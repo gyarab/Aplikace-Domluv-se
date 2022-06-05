@@ -52,7 +52,7 @@ public class PridejSlovicko extends Fragment {
         // Vytvoří dialog pro zadání hesla
         AlertDialog.Builder builder
                 = new AlertDialog.Builder(getContext());
-        builder.setTitle("Zadejte heslo");
+        builder.setTitle(getString(R.string.zadejte_heslo));
 
         // Nastaví vzhled dialogu
         final View customLayout
@@ -127,9 +127,9 @@ public class PridejSlovicko extends Fragment {
 
     // Vytvoří dialog na výběr obrázku, má dvě možnosti, buď z galerie nebo z fotoaparátu. Poté dialog zobrazí.
     private void showImagePicDialog() {
-        String options[] = {"Fotoaparátu", "Galerie"};
+        String options[] = {getString(R.string.fotoaparat), getString(R.string.galerie)};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Vyberte obrázek z");
+        builder.setTitle(getString(R.string.vyberte_obrazek_z));
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -186,7 +186,7 @@ public class PridejSlovicko extends Fragment {
                     if (camera_accepted && writeStorageaccepted) {
                         pickFromGallery();
                     } else {
-                        Toast.makeText(getContext(), "Please Enable Camera and Storage Permissions", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getString(R.string.zadost1), Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -197,7 +197,7 @@ public class PridejSlovicko extends Fragment {
                     if (writeStorageaccepted) {
                         pickFromGallery();
                     } else {
-                        Toast.makeText(getContext(), "Please Enable Storage Permissions", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getString(R.string.zadost2), Toast.LENGTH_LONG).show();
                     }
                 }
             }

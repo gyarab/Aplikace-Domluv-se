@@ -7,7 +7,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:hint="Heslo"
+        android:hint="@string/heslo"
         android:id="@+id/dialogoveheslo"
         android:inputType="textPassword"
         android:ems="10" />

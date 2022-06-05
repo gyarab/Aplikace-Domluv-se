@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Domluv se!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -46,6 +47,4 @@
     <string name="aktivita2">Aktivita</string>
     <string name="slovicko">Slovíčko</string>
     <string name="ulozit">Uložit</string>
-
-
 </resources>

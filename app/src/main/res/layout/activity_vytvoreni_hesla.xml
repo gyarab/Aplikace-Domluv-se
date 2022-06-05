@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:text="Domluv se!"
+                android:text="@string/app_name"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="50dp"
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="30dp"
-                android:text="S námi to bude hračka, nevěříte?"
+                android:text="@string/info1"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="30dp"
-                android:text="1) Vložíte obrázek"
+                android:text="@string/info2"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="30dp"
-                android:text="2) Pojmenujete ho"
+                android:text="@string/info3"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="30dp"
-                android:text="3) Uložíte"
+                android:text="@string/info4"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="30dp"
-                android:text="4) A máte obrázkovou kartičku"
+                android:text="@string/info5"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="30dp"
-                android:text="5) Dítě z kartiček jednoduše poskládá větu"
+                android:text="@string/info6"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:paddingLeft="30dp"
-                android:text="Jednoduché, že?"
+                android:text="@string/info7"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -92,7 +92,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:paddingLeft="30dp"
-                    android:text="Zadejte heslo:"
+                    android:text="@string/zadejte_heslo"
                     android:textColor="@color/black"
                     android:textSize="30dp" />
 
@@ -101,7 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Heslo"
+                    android:hint="@string/heslo"
                     android:textColor="@color/black"
                     android:textSize="30dp"
                     android:inputType="textPassword"
@@ -113,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:paddingLeft="30dp"
-                android:text="Nejdříve si prosím nastavte heslo, slouží pouze k tomu, aby dítě nemohlo v nestřežený okamžik smazat slovíčka, nebo udělat nějakou jinou neplechu."
+                android:text="@string/instrukce"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="UlozHeslo"
                 android:paddingLeft="30dp"
-                android:text="Hotovo"
+                android:text="@string/hotovo"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:layout_gravity="center_horizontal" />

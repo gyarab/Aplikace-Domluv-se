@@ -31,7 +31,7 @@ public class VytvoreniHesla extends AppCompatActivity {
         //Pokud uživatel nezadal heslo, zobrazí se mu tento dialog s připomínkou
         if (editText.getText().toString().equals("")) {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setMessage("Zadejte Heslo")
+                    .setMessage(getString(R.string.zadejte_heslo))
                     .setPositiveButton("ok", null)
                     .show();
             return;

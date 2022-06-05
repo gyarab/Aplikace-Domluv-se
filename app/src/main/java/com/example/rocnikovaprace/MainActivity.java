@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 //Ošetřuje chybu, nejde vytvořit slovíčko i aktivitu zároveň
         if (aktivita.isChecked() == true && slovicko.isChecked() == true) {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setMessage("Vyberte buď slovíčko nebo aktivitu")
+                    .setMessage(getString(R.string.vyzva3))
                     .setPositiveButton("ok", null)
                     .show();
             return;
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 // Ošetřuje chybu. Uživatel musí zadat, jestli je to slovíčko, nebo aktivita
         if (aktivita.isChecked() == false && slovicko.isChecked() == false) {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setMessage("Vyberte buď slovíčko nebo aktivitu")
+                    .setMessage(getString(R.string.vyzva3))
                     .setPositiveButton("ok", null)
                     .show();
             return;
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             while ((zeSouboru = br.readLine()) != null) {
                 if (nazev.equals(zeSouboru)) {
                     AlertDialog dialog = new AlertDialog.Builder(this)
-                            .setMessage("Toto slovíčko, nebo aktivita již existuje. Změňte název.")
+                            .setMessage(getString(R.string.vyzva4))
                             .setPositiveButton("ok", null)
                             .show();
                     return;
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 editText.setText("");
                 editText2.setText("");
 
-                Snackbar.make(getCurrentFocus(), "Heslo bylo změněno", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getCurrentFocus(), getString(R.string.heslosezmenilo), Snackbar.LENGTH_LONG).show();
 
 
             } catch (Exception e) {
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setMessage("Nesprávné heslo")
+                    .setMessage(getString(R.string.nespravne_heslo))
                     .setPositiveButton("ok", null)
                     .show();
             return;

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/Slovonove"
-        android:hint="Slovo"
+        android:hint="@string/slovo"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textAllCaps="true"
