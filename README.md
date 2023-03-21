@@ -5,4 +5,4 @@ Cílem mé středoškolské odborné činnosti je vytvořit android aplikaci, kt
 
 * Video o mé práci je zde: https://youtu.be/b_vBuWVs-M4
 
-* Aplikace je nově dostupná na Google Play: https://play.google.com/store/apps/details?id=com.priklad.rocnikovaprace&hl=cs
+* Aplikace je dostupná na Google Play: https://play.google.com/store/apps/details?id=com.priklad.rocnikovaprace&hl=cs
